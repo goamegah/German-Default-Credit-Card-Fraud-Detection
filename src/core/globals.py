@@ -6,7 +6,7 @@ MODEL_HYPERPARAMETERS_DEF = \
             {
                 "penalty": "l2",
                 "C": 1.,
-                "solver": "lbfgs",
+                "solver": "liblinear",
                 "multi_class": "auto",
                 "n_jobs": None,
                 "max_iter": 100
@@ -74,7 +74,25 @@ MODEL_HYPERPARAMETERS_DEF = \
                 "validation_fraction":0.1,
                 "n_iter_no_change":None,
                 "tol":1e-4,
-                "ccp_alpha":0.0,
+                "ccp_alpha":0.0
+            },
+        "XGBClassifier":
+            {
+                'num_class':2,
+                'max_depth':5,
+                'n_estimators':10,
+                'learning_rate':0.1,
+                'objective':'multi:softmax',
+                'subsample':0.8,
+            },
+        "LinearDiscriminantAnalysis":
+            {
+                "solver":'lsqr',
+                "shrinkage":0
+            },
+        "QuadraticDiscriminantAnalysis":
+            {
+                'reg_param': [0.5],
             }
 
     }
@@ -88,7 +106,7 @@ PARAMS_GRID = \
                 "solver": ["liblinear"],
                 "multi_class": ["auto"],
                 "n_jobs": [None],
-                "max_iter": [100,150]
+                "max_iter": [500, 700, 1000]
             },
         "SVM":
             {
@@ -122,6 +140,24 @@ PARAMS_GRID = \
             {
                 "learning_rate":[0.15,0.1,0.05,0.01,0.005,0.001],
                 "n_estimators":[100,250,500,750,1000,1250,1500,1750]
+            },
+        "XGBClassifier":
+            {
+                "learning_rate":[0.1, 0.01],
+                "n_estimators":[100,250,500],
+                "max_depth":list(np.random.randint(1,20,size=5)),
+                "gamma":[0.01,0],
+                "min_child_weight":[6,8],
+                "reg_alpha":[0.1,0.01]
+            },
+        "LinearDiscriminantAnalysis":
+            {
+                "solver":['lsqr', 'eigen'],
+                "shrinkage":np.arange(0, 1, 0.01)
+            },
+        "QuadraticDiscriminantAnalysis":
+            {
+                'reg_param': [0.1, 0.2, 0.3, 0.4, 0.5],
             }
     }
 
