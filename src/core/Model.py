@@ -1,5 +1,6 @@
 from matplotlib.axes import Axes
 from sklearn.linear_model import LogisticRegression
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.metrics import precision_recall_fscore_support, roc_curve, auc
@@ -7,6 +8,7 @@ from src.core.globals import MODEL_HYPERPARAMETERS_DEF
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.inspection import permutation_importance
+from xgboost import XGBClassifier
 
 
 class Model:
@@ -32,6 +34,12 @@ class Model:
                 self.model = RandomForestClassifier(**self.hyperparameters)
             elif model_name == "GradientBoostingClassifier":
                 self.model = GradientBoostingClassifier(**self.hyperparameters)
+            elif model_name == "XGBClassifier":
+                self.model = XGBClassifier(**self.hyperparameters)
+            elif model_name == "LinearDiscriminantAnalysis":
+                self.model = LinearDiscriminantAnalysis(**self.hyperparameters)
+            elif model_name == "QuadraticDiscriminantAnalysis":
+                self.model = QuadraticDiscriminantAnalysis(**self.hyperparameters)
 
         else:
             self.model = None
